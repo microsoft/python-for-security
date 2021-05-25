@@ -4,12 +4,20 @@ import getfileloop
 import create_files
 import listcompare
 import teams
+import create_folders
 
+#Inputs
 webhook = input('Please enter your Microsoft Teams webhook link: ')
+baseline_file = input('Enter the baseline filename: ')
 
+#Test Teams connectivity
 send_teams_test = teams.Teams(webhook, 'Azure IP Tracker is now reporting to your Teams Channel')
 send_teams_test.teams()
 
+#Get baseline to archieve
+os.replace(f'./{baseline_file}', f'./archieve/{baseline_file}')
+
+#Loop non stop
 while True:
     #Download new file and replace old one in archieve
     try:
