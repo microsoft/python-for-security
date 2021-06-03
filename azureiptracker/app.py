@@ -1,4 +1,5 @@
 import os
+import shutil
 import time
 import getfileloop
 import create_files
@@ -6,25 +7,50 @@ import listcompare
 import teams
 import create_folders
 
-#Inputs
-webhook = input('Please enter your Microsoft Teams webhook link: ')
-baseline_file = input('Enter the baseline filename: ')
+#Create folders
+downloads = create_folders.CreateFolder('downloads')
+archieve = create_folders.CreateFolder('archieve')
+compare_files_new = create_folders.CreateFolder('compare_files_new')
+compare_files_old = create_folders.CreateFolder('compare_files_old')
 
-#Test Teams connectivity
-send_teams_test = teams.Teams(webhook, 'Azure IP Tracker is now reporting to your Teams Channel')
-send_teams_test.teams()
+try:
+    downloads.createfolder()
+except FileExistsError:
+    print('Folder downloads already exists')
+try:
+    archieve.createfolder()
+except FileExistsError:
+    print('Folder archieve already exists')
+try:
+    compare_files_new.createfolder()
+except FileExistsError:
+    print('Folder compare_files_new already exists')
+try:
+    compare_files_old.createfolder()
+except FileExistsError:
+    print('Folder compare_files_old already exists')
 
 #Get baseline to archieve
-os.replace(f'./{baseline_file}', f'./archieve/{baseline_file}')
+baseline_file = input('Enter the baseline filename: ')
+shutil.move(f'./{baseline_file}', f'./archieve/{baseline_file}')
+
+#Test Teams connectivity
+webhook = input('Please enter your Microsoft Teams webhook link: ')
+send_teams_test = teams.Teams(webhook, 'Azure IP Tracker is now reporting to your Teams Channel')
+send_teams_test.teams()
 
 #Loop non stop
 while True:
     #Download new file and replace old one in archieve
     try:
-        getfileloop.Downloadloop.downloadloop()
-
+        if not os.listdir('./downloads'):
+            getfileloop.Downloadloop.downloadloop()
+        else:
+            getfileloop.Downloadloop.downloadcleanup()
+            getfileloop.Downloadloop.downloadloop()
     except Exception as e:
-        pass
+        print(e)
+        
 
     #Create the files with subnets
     try:
