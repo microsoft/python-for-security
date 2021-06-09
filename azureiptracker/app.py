@@ -32,12 +32,22 @@ except FileExistsError:
 
 #Get baseline to archieve
 baseline_file = input('Enter the baseline filename: ')
+shutil.copy(f'./{baseline_file}', f'./downloads/{baseline_file}')
 shutil.move(f'./{baseline_file}', f'./archieve/{baseline_file}')
 
 #Test Teams connectivity
 webhook = input('Please enter your Microsoft Teams webhook link: ')
 send_teams_test = teams.Teams(webhook, 'Azure IP Tracker is now reporting to your Teams Channel')
 send_teams_test.teams()
+
+#Create the files with subnets
+try:
+    old_filenames = create_files.Createfile('archieve', 'compare_files_old')
+    old_filenames.createfile()
+    new_filenames = create_files.Createfile('downloads', 'compare_files_new')
+    new_filenames.createfile()
+except Exception as e:
+    print(e)
 
 #Loop non stop
 while True:
@@ -49,9 +59,10 @@ while True:
             getfileloop.Downloadloop.downloadcleanup()
             getfileloop.Downloadloop.downloadloop()
     except Exception as e:
-        print(e)
+        print(f'{e} - Waiting for new file')
+        time.sleep(28800)
+        continue
         
-
     #Create the files with subnets
     try:
         old_filenames = create_files.Createfile('archieve', 'compare_files_old')
@@ -92,4 +103,3 @@ while True:
         send_teams_created.teams()
         print(f'New group of subnets added - {filename}')
     print(f'#{time.asctime(time.localtime(time.time()))} - Waiting for new file')
-    time.sleep(28800)
