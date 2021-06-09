@@ -12,11 +12,9 @@ class Downloadloop:
         print(f'ServiceTags_Public_{today}.json created #{time.asctime(time.localtime(time.time()))}')
         
     def downloadcleanup():   
-        today = time.strftime('%Y%m%d')
         archievefoler = os.listdir('./archieve')
         for file in archievefoler:
             os.remove(f'./archieve/{file}')
         downloadfolder = os.listdir('./downloads')
         for file in downloadfolder:
             os.rename(f'downloads/{file}', f'archieve/{file}')
-        os.replace(f'ServiceTags_Public_{today}.json', f'downloads/ServiceTags_Public_{today}.json')
