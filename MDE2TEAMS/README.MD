@@ -43,8 +43,8 @@ optional arguments:
 Original project created by Bruno Rodrigues - rodrigues.bruno@microsoft.com
 
 # Usage & Examples
-To Run the app (every argument will require to be run separate)
-python app.py alerts
-python app.py vulnerabilities
+To Run the app (every argument will require to be run separate):
+- python app.py alerts
+- python app.py vulnerabilities
 
 # To-Do
