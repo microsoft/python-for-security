@@ -8,8 +8,8 @@ MDE CLI  can be ran from any OS as long it's running python 3.6 or above. You'll
 pip install -r requiremnts.txt
 
 # Usage
-python app.py -h --> for help menu
-python app.py <choice> -h --> for sub options menu
+ ### python app.py -h --> for help menu
+ ### python app.py <choice> -h --> for sub options menu
 
 ## Example
  ### python app.py -h
