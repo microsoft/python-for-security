@@ -36,10 +36,8 @@ try:
             new_csv = read.Csv(filename)
             new_csv.open()
             for ids in new_csv.list_ids:
-                new_offboard = offboard.Offboard(token, ids, comment)
-                new_offboard.offboard()
-                print
-
+                new_offboard_action = offboard.Offboard(token, ids, comment)
+                new_offboard_action.offboard()
         elif args.quick:
             print("Let's quick scan")
         else:
