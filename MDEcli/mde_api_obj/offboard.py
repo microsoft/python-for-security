@@ -9,17 +9,19 @@ class Offboard:
         self.comment = comment
 
     def offboard(self):
-        url = f"https://api.securitycenter.microsoft.com/api/machines/{self.id}/offboard"
-        headers = { 
-            'Content-Type' : 'application/json',
-            'Accept' : 'application/json',
-            'Authorization' : "Bearer " + self.token
-        }
+        try:
+            url = f"https://api.securitycenter.microsoft.com/api/machines/{self.id}/offboard"
+            headers = { 
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json',
+                'Authorization' : "Bearer " + self.token
+            }
 
-        data = json.dumps({"Comment": self.comment}).encode("utf-8")
+            data = json.dumps({"Comment": self.comment}).encode("utf-8")
 
-        req = urllib.request.Request(url, data, headers)
-        response = urllib.request.urlopen(req)
-        jsonResponse = json.loads(response.read())
-        self.results = jsonResponse["Results"]
-        return self.results
+            req = urllib.request.Request(url, data, headers)
+            response = urllib.request.urlopen(req)
+            jsonResponse = json.loads(response.read())
+            print(jsonResponse)
+        except Exception as e:
+            print(e)
