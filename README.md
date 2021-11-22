@@ -1,14 +1,15 @@
+---
+page_type: sample
+languages:
+- python
+products:
+- mdatp API
+description: "Auxiliary tools and sampled for Microsoft Defender ATP Cross-Platform"
+---
+
 # Project
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
-
-As the maintainer of this project, please make a few updates:
-
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+Welcome to Python for Security, the repo that cotains multiple examples on how to use python with our greatest security products and features. Be part of this changing community that aims to make organizations more secure by leveraging the power of python with Microsoft Azure Security Solutions.
 
 ## Contributing
 
