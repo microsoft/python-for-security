@@ -10,8 +10,6 @@ pip install -r requiremnts.txt
 # Usage
  ### python app.py -h --> for help menu
  ### python app.py <choice> -h --> for sub options menu
-
-## Example
  ### python app.py -h
   
   usage: app.py [-h] {actions} ...
@@ -36,6 +34,7 @@ optional arguments:
   -offboard   Offboard device from Defender for Endpoint.
   -quick      Initiate Microsoft Defender Antivirus quick scan on a device.
   
+## Example
   ### python app.py actions -offboard
   This command will allow you to offboard multiple machines at a ytime by using the Device List exported from MDE portal.
  
