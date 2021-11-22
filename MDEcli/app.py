@@ -24,7 +24,6 @@ try:
     tenantid = input('Please enter your Tenant ID: ')
     appid = input('Please enter your Application ID: ')
     secret = getpass.getpass('Please enter your Application Secret:')
-    webhook = getpass.getpass('Please enter your webhook from Teams: ')
     new_token = gettoken.GetToken(tenantid, appid, secret)
     new_token.gettoken()
     token = new_token.aadToken
@@ -33,13 +32,13 @@ try:
     if args.Commands == 'actions':
         if args.offboard:
             filename = input('Please enter the CSV filename (export from MDE/Devices): ')
-            comment = input('COmment (mandatory): ')
+            comment = input('Comment (mandatory): ')
             new_csv = read.Csv(filename)
             new_csv.open()
             for ids in new_csv.list_ids:
                 new_offboard = offboard.Offboard(token, ids, comment)
                 new_offboard.offboard()
-                print(new_offboard.results)
+                print
 
         elif args.quick:
             print("Let's quick scan")
