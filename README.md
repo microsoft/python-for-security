@@ -9,7 +9,7 @@ description: "Auxiliary tools and sampled for Microsoft Defender ATP Cross-Platf
 
 # Project
 
-Welcome to Python for Security, the repo that cotains multiple examples on how to use python with our greatest security products and features. Be part of this changing community that aims to make organizations more secure by leveraging the power of python with Microsoft Azure Security Solutions.
+Welcome to Python for Security, the repo that contains multiple examples on how to use python with our greatest security products and features. Be part of this changing community that aims to make organizations more secure by leveraging the power of python with Microsoft Azure Security Solutions.
 
 ## Contributing
 
