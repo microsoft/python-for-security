@@ -4,13 +4,21 @@ import time
 import sys
 
 from pandas.core.indexes.base import Index
-from mde_api_obj import gettoken, offboard
+from mde_api_obj import gettoken, offboard, list
 from global_obj import read
 
 #menu argparser
 parser = argparse.ArgumentParser(prog='app.py', description='MDEcli = A tool manage MDE through CLI', epilog='Original project created by Bruno Rodrigues - rodrigues.bruno@microsoft.com')
 subparsers = parser.add_subparsers(dest='Commands', title='Available options', help='Choose one of the main options. MDEcli -<option> -h for more details for each main option.')
 subparsers.required=True
+
+#Alerts menu
+alertsparser = subparsers.add_parser('alerts', help='Alert resource type')
+alertsparser.add_argument('-list', help='Retrieves a collection of Alerts.', action='store_true')
+
+#Automated Investigations menu
+investigationparser = subparsers.add_parser('investigations', help='Investigation resource type')
+investigationparser.add_argument('-list', help='Retrieves a collection of Investigations.', action='store_true')
 
 #Machines Actions menu
 machineactionsparser = subparsers.add_parser('actions', help='MachineAction resource type')
@@ -28,8 +36,24 @@ try:
     new_token.gettoken()
     token = new_token.aadToken
 
+#Alerts
+    if args.Commands == 'alerts':
+        if args.list:
+            new_alerts_list = list.List(token,'alerts')
+            new_alerts_list.list()
+        else:
+          parser.print_help()
+
+#Investigation
+    elif args.Commands == 'investigations':
+        if args.list:
+            new_investigation_list = list.List(token,'investigations')
+            new_investigation_list.list()
+        else:
+          parser.print_help()
+
 #Actions
-    if args.Commands == 'actions':
+    elif args.Commands == 'actions':
         if args.offboard:
             filename = input('Please enter the CSV filename (export from MDE/Devices): ')
             comment = input('Comment (mandatory): ')
@@ -41,7 +65,7 @@ try:
         elif args.quick:
             print("Let's quick scan")
         else:
-            parser.print_help()
+            parser.print_help()  
     else:
         parser.print_help()
 except Exception as e:
