@@ -20,10 +20,22 @@ alertsparser.add_argument('-list', help='Retrieves a collection of Alerts.', act
 investigationparser = subparsers.add_parser('investigations', help='Investigation resource type')
 investigationparser.add_argument('-list', help='Retrieves a collection of Investigations.', action='store_true')
 
+#Indicators menu
+indicatorparser = subparsers.add_parser('indicators', help='Indicator resource type')
+indicatorparser.add_argument('-list', help='Retrieves a collection of all active Indicators.', action='store_true')
+
+#Machines menu
+machineparser = subparsers.add_parser('machines', help='Machine resource type')
+machineparser.add_argument('-list', help='Retrieves a collection of Machines that have communicated with Microsoft Defender for Endpoint cloud.', action='store_true')
+
 #Machines Actions menu
 machineactionsparser = subparsers.add_parser('actions', help='MachineAction resource type')
 machineactionsparser.add_argument('-offboard', help='Offboard device from Defender for Endpoint.', action='store_true')
 machineactionsparser.add_argument('-quick', help='Initiate Microsoft Defender Antivirus quick scan on a device.', action='store_true')
+
+#Recommendations menu
+recommendationsparser = subparsers.add_parser('recommendations', help='Recommendation resource type')
+recommendationsparser.add_argument('-list', help='Retrieves a collection of Machines that have communicated with Microsoft Defender for Endpoint cloud.', action='store_true')
 
 args = parser.parse_args()
 
@@ -36,21 +48,10 @@ try:
     new_token.gettoken()
     token = new_token.aadToken
 
-#Alerts
-    if args.Commands == 'alerts':
-        if args.list:
-            new_alerts_list = list.List(token,'alerts')
-            new_alerts_list.list()
-        else:
-          parser.print_help()
-
-#Investigation
-    elif args.Commands == 'investigations':
-        if args.list:
-            new_investigation_list = list.List(token,'investigations')
-            new_investigation_list.list()
-        else:
-          parser.print_help()
+#List anything
+    if args.list:
+        new_list = list.List(token, args.Commands)
+        new_list.list()
 
 #Actions
     elif args.Commands == 'actions':
@@ -65,7 +66,8 @@ try:
         elif args.quick:
             print("Let's quick scan")
         else:
-            parser.print_help()  
+            parser.print_help()
+
     else:
         parser.print_help()
 except Exception as e:
