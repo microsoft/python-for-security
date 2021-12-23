@@ -3,8 +3,8 @@ page_type: sample
 languages:
 - python
 products:
-- mdatp API
-description: "Auxiliary tools and sampled for Microsoft Defender ATP Cross-Platform"
+- MDE API
+description: "Auxiliary tools and samples for Microsoft Defender ATP Cross-Platform"
 ---
 
 # Project
