@@ -5,7 +5,7 @@ This sample code creates an easy way to interact with Microsoft Defedner for End
 MDE CLI  can be ran from any OS as long it's running python 3.6 or above. You'll be required to use pip
 
 ## Instalation
-pip install -r requiremnts.txt
+pip install -r requirements.txt
 
 # Usage
  ### python app.py -h --> for help menu
