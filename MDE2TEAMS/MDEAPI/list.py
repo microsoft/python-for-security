@@ -14,9 +14,6 @@ class List:
             'Accept' : 'application/json',
             'Authorization' : "Bearer " + self.token
         }
-
-
-
         req = urllib.request.Request(url, headers=headers)
         response = urllib.request.urlopen(req)
         self.jsonResponse = json.loads(response.read())
